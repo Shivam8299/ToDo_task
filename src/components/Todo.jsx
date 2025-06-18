@@ -10,6 +10,13 @@ function Todo() {
     });
     setItem("");
   };
+
+  const deleteItem = (indexToDelete) => {
+    setInputItem((oldValue) =>
+      oldValue.filter((_, index) => index !== indexToDelete)
+    );
+  };
+
   return (
     <div className="bg-emerald-100 h-screen pt-32">
       <div className="bg-white h-80 w-80 rounded-xl border mx-auto my-auto">
@@ -32,10 +39,10 @@ function Todo() {
           </button>
           <div>
             <ol className="mt-4 mb-3 pl-8">
-              {inputItem.map((itemValue) => {
+              {inputItem.map((itemValue, index) => {
                 return (
-                  <div className="flex">
-                    <button>
+                  <div key={index} className="flex">
+                    <button onClick={() => deleteItem(index)}>
                       <X className="w-5 h-5 p-1 rounded-full mr-1  bg-blue-300 cursor-pointer hover:bg-red-600 text-white" />
                     </button>
                     <li className="text-xl">{itemValue}</li>
